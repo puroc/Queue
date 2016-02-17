@@ -42,7 +42,7 @@ public class HighConsumer {
 	public static void main(String[] args) {
 		Properties props = new Properties();
 		// 接收之前从未接收的所有数据
-		props.put("auto.offset.reset", "earliest");
+//		props.put("auto.offset.reset", "earliest");
 		props.put("bootstrap.servers", GlobalConfig.KAFKA_HOSTS_AND_PORT);
 		// 不会在zookeeper的consumers下创建该group.id的节点
 		props.put("group.id", "ccc");
