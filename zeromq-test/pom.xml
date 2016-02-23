@@ -28,7 +28,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.example.zeromq.dealer.Server1</mainClass>
+							<mainClass>com.example.zeromq.dealer.Client1</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

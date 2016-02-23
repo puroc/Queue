@@ -1,25 +1,28 @@
 package com.example.zeromq.dealer;
 
 import org.zeromq.ZMQ;
+import org.zeromq.ZMsg;
+
+import com.example.zeromq.Counter;
 
 public class Client1 {
+
+	// private static final String HOST = "192.168.1.230";
+	private static final String HOST = "localhost";
 
 	public static void main(String[] args) {
 		try {
 			ZMQ.Context context = ZMQ.context(1);
 			final ZMQ.Socket socket = context.socket(ZMQ.DEALER);
-			socket.bind("tcp://192.168.1.124:5557");
+			socket.bind("tcp://" + HOST + ":5557");
 			new Thread(new Runnable() {
 
 				public void run() {
 					while (true) {
-
-						//比较奇怪，有的时候收不到消息（即时对端不断的发送消息，并且对端显示发送消息成功）
 						byte[] recv = socket.recv(ZMQ.DONTWAIT);
 						if (recv == null) {
 							try {
-								System.out.println("null");
-								Thread.sleep(1000);
+								Thread.sleep(1);
 								continue;
 							} catch (InterruptedException e) {
 								e.printStackTrace();
@@ -31,9 +34,8 @@ public class Client1 {
 				}
 			}).start();
 			boolean b = true;
-			// Thread.sleep(5000);
 			for (int i = 0; b; i++) {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				socket.send("hello " + i, 0);
 			}
 			socket.close();
